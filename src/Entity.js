@@ -1,17 +1,18 @@
 import Query from "./Query.js";
 import wrapImmutableComponent from "./WrapImmutableComponent.js";
+const uuid = require("uuid");
 
 // @todo Take this out from there or use ENV
 const DEBUG = false;
 
-var nextId = 0;
+var nextId = uuid.v4();
 
 export default class Entity {
   constructor(world) {
     this._world = world || null;
 
     // Unique ID for this entity
-    this.id = nextId++;
+    this.id = uuid.v4();
 
     // List of components types the entity has
     this._ComponentTypes = [];
@@ -117,7 +118,7 @@ export default class Entity {
 
   // Initialize the entity. To be used when returning an entity to the pool
   reset() {
-    this.id = nextId++;
+    this.id = uuid.v4();
     this._world = null;
     this._ComponentTypes.length = 0;
     this.queries.length = 0;

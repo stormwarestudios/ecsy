@@ -62,7 +62,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.2",
-    "docsify-cli": "^4.3.0",
+    "docsify-cli": "^4.4.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -75,5 +75,8 @@
     "typedoc": "^0.15.0",
     "typedoc-plugin-markdown": "^2.2.6",
     "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3"
   }
 }

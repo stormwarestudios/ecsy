@@ -1,9 +1,9 @@
 if (typeof window === "undefined") {
-  console.log(`Node.js`);
+  //console.log(`Node.js`);
   const { performance } = require("perf_hooks");
   global.performance = performance;
 } else {
-  console.log(`Browser`);
+  //console.log(`Browser`);
 }
 
 export { World } from "./World.js";

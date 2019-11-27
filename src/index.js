@@ -1,8 +1,7 @@
 if (typeof window === "undefined") {
   console.log(`Node.js`);
-  global.performance = {
-    now: require("performance-now")
-  };
+  const { performance } = require("perf_hooks");
+  global.performance = performance;
 } else {
   console.log(`Browser`);
 }

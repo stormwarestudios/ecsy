@@ -1037,8 +1037,6 @@ var devDependencies = {
 	typescript: "^3.6.3"
 };
 var dependencies = {
-	hrtime: "^0.5.0",
-	"performance-now": "^2.1.0"
 };
 var pjson = {
 	name: name,
@@ -1566,12 +1564,9 @@ function createComponentClass(schema, name) {
 }
 
 if (typeof window === "undefined") {
-  console.log(`Node.js`);
-  global.performance = {
-    now: require("performance-now")
-  };
-} else {
-  console.log(`Browser`);
+  //console.log(`Node.js`);
+  const { performance } = require("perf_hooks");
+  global.performance = performance;
 }
 
 export { Component, Not, System, SystemStateComponent, TagComponent, Types, Version, World, createComponentClass, createType };

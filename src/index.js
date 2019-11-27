@@ -1,6 +1,8 @@
 if (typeof window === "undefined") {
   console.log(`Node.js`);
-  global.performance = require("hrtime");
+  global.performance = {
+    now: require("performance-now")
+  };
 } else {
   console.log(`Browser`);
 }

@@ -16,8 +16,7 @@
     "start": "npm run dev",
     "test": "ava",
     "travis": "npm run lint && npm run test && npm run build",
-    "watch:test": "ava --watch",
-    "postinstall": "npm run build"
+    "watch:test": "ava --watch"
   },
   "repository": {
     "type": "git",

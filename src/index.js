@@ -1,5 +1,6 @@
 if (typeof window === "undefined") {
   console.log(`Node.js`);
+  global.performance = require("hrtime");
 } else {
   console.log(`Browser`);
 }

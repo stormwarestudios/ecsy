@@ -1048,6 +1048,7 @@
 		typescript: "^3.6.3"
 	};
 	var dependencies = {
+		hrtime: "^0.5.0"
 	};
 	var pjson = {
 		name: name,
@@ -1576,6 +1577,7 @@
 
 	if (typeof window === "undefined") {
 	  console.log(`Node.js`);
+	  global.performance = require("hrtime");
 	} else {
 	  console.log(`Browser`);
 	}

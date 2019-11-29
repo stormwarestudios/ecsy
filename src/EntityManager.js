@@ -33,7 +33,7 @@ export class EntityManager {
    * Create a new entity
    */
   createEntity() {
-    var entity = this._entityPool.aquire();
+    var entity = this._entityPool.acquire();
     entity.alive = true;
     entity._world = this;
     this._entities.push(entity);
@@ -85,7 +85,7 @@ export class EntityManager {
    * Remove a component from an entity
    * @param {Entity} entity Entity which will get removed the component
    * @param {*} Component Component to remove from the entity
-   * @param {Bool} immediately If you want to remove the component immediately instead of deferred (Default is false)
+   * @param {boolean} immediately If you want to remove the component immediately instead of deferred (Default is false)
    */
   entityRemoveComponent(entity, Component, immediately) {
     var index = entity._ComponentTypes.indexOf(Component);

@@ -11,11 +11,11 @@ function b(a) {
 const DEBUG = false;
 
 export default class Entity {
-  constructor(world) {
+  constructor(world, id) {
     this._world = world || null;
 
     // Unique ID for this entity
-    this.id = b();
+    this.id = id || b();
 
     // List of components types the entity has
     this._ComponentTypes = [];
@@ -130,5 +130,13 @@ export default class Entity {
 
   remove(forceRemove) {
     return this._world.removeEntity(this, forceRemove);
+  }
+
+  export() {}
+
+  import(data) {
+    this._id = data.id;
+    const components = this._world.componentsManager.getComponents();
+    console.log(components);
   }
 }

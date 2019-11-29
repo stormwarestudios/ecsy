@@ -97,7 +97,7 @@ test("ObjectPool", t => {
   // Create 10 components
 
   for (let i = 0; i < 10; i++) {
-    components.push(pool.aquire());
+    components.push(pool.acquire());
   }
 
   t.is(pool.totalSize(), 12);
@@ -128,7 +128,7 @@ test("ObjectPool", t => {
 
   // Create new components
   for (let i = 0; i < 3; i++) {
-    components.push(pool.aquire());
+    components.push(pool.acquire());
   }
 
   for (let i = 0; i < components.length; i++) {

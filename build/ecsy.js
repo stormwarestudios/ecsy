@@ -331,11 +331,11 @@
 	}
 
 	class Entity {
-	  constructor(world) {
+	  constructor(world, id) {
 	    this._world = world || null;
 
 	    // Unique ID for this entity
-	    this.id = b();
+	    this.id = id || b();
 
 	    // List of components types the entity has
 	    this._ComponentTypes = [];
@@ -451,6 +451,14 @@
 	  remove(forceRemove) {
 	    return this._world.removeEntity(this, forceRemove);
 	  }
+
+	  export() {}
+
+	  import(data) {
+	    this._id = data.id;
+	    const components = this._world.componentsManager.getComponents();
+	    console.log(components);
+	  }
 	}
 
 	class ObjectPool {
@@ -480,7 +488,7 @@
 	    }
 	  }
 
-	  aquire() {
+	  acquire() {
 	    // Grow the list by 20%ish if we're out
 	    if (this.freeList.length <= 0) {
 	      this.expand(Math.round(this.count * 0.2) + 1);
@@ -658,7 +666,7 @@
 	   * Create a new entity
 	   */
 	  createEntity() {
-	    var entity = this._entityPool.aquire();
+	    var entity = this._entityPool.acquire();
 	    entity.alive = true;
 	    entity._world = this;
 	    this._entities.push(entity);
@@ -710,7 +718,7 @@
 	   * Remove a component from an entity
 	   * @param {Entity} entity Entity which will get removed the component
 	   * @param {*} Component Component to remove from the entity
-	   * @param {Bool} immediately If you want to remove the component immediately instead of deferred (Default is false)
+	   * @param {boolean} immediately If you want to remove the component immediately instead of deferred (Default is false)
 	   */
 	  entityRemoveComponent(entity, Component, immediately) {
 	    var index = entity._ComponentTypes.indexOf(Component);
@@ -928,6 +936,10 @@
 	    this.Components = {};
 	    this._componentPool = {};
 	    this.numComponents = {};
+	  }
+
+	  getComponents() {
+	    return this.Components;
 	  }
 
 	  registerComponent(Component) {

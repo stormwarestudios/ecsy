@@ -61,7 +61,7 @@ export class EntityManager {
     var componentPool = this.world.componentsManager.getComponentsPool(
       Component
     );
-    var component = componentPool.aquire();
+    var component = componentPool.acquire();
 
     entity._components[Component.name] = component;
 

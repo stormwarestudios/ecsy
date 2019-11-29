@@ -694,7 +694,7 @@
 	    var componentPool = this.world.componentsManager.getComponentsPool(
 	      Component
 	    );
-	    var component = componentPool.aquire();
+	    var component = componentPool.acquire();
 
 	    entity._components[Component.name] = component;
 
@@ -908,7 +908,7 @@
 	    this.T = T;
 	  }
 
-	  aquire() {
+	  acquire() {
 	    this.used++;
 	    this.count++;
 	    return new this.T();

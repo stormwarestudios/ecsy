@@ -132,11 +132,29 @@ export default class Entity {
     return this._world.removeEntity(this, forceRemove);
   }
 
-  export() {}
+  export() {
+    const exported = {
+      id: this.id,
+      _components: {}
+    };
+    for (const [key, value] of Object.entries(this._components)) {
+      if (value.hasOwnProperty("export")) {
+        exported._components[key] = value.export();
+      } else {
+        exported._components[key] = JSON.parse(JSON.stringify(value));
+      }
+    }
+    return exported;
+  }
 
   import(data) {
     this._id = data.id;
-    const components = this._world.componentsManager.getComponents();
-    console.log(components);
+    if (!data.hasOwnProperty("_components")) return;
+    const worldComponents = this._world.componentsManager.getComponents();
+    for (const [key, value] of Object.entries(data._components)) {
+      if (worldComponents.hasOwnProperty(key)) {
+        this.addComponent(worldComponents[key], value);
+      }
+    }
   }
 }

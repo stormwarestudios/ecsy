@@ -441,12 +441,30 @@ class Entity {
     return this._world.removeEntity(this, forceRemove);
   }
 
-  export() {}
+  export() {
+    const exported = {
+      id: this.id,
+      _components: {}
+    };
+    for (const [key, value] of Object.entries(this._components)) {
+      if (value.hasOwnProperty("export")) {
+        exported._components[key] = value.export();
+      } else {
+        exported._components[key] = JSON.parse(JSON.stringify(value));
+      }
+    }
+    return exported;
+  }
 
   import(data) {
     this._id = data.id;
-    const components = this._world.componentsManager.getComponents();
-    console.log(components);
+    if (!data.hasOwnProperty("_components")) return;
+    const worldComponents = this._world.componentsManager.getComponents();
+    for (const [key, value] of Object.entries(data._components)) {
+      if (worldComponents.hasOwnProperty(key)) {
+        this.addComponent(worldComponents[key], value);
+      }
+    }
   }
 }
 
@@ -1039,6 +1057,7 @@ var devDependencies = {
 	"eslint-config-prettier": "^4.3.0",
 	"eslint-plugin-prettier": "^3.1.1",
 	"http-server": "^0.11.1",
+	husky: "^3.1.0",
 	nodemon: "^1.19.2",
 	prettier: "^1.18.2",
 	rollup: "^1.21.4",
@@ -1049,6 +1068,11 @@ var devDependencies = {
 	typescript: "^3.6.3"
 };
 var dependencies = {
+};
+var husky = {
+	hooks: {
+		"pre-push": "npm run build && git add build && git commit -m 'build'"
+	}
 };
 var pjson = {
 	name: name,
@@ -1068,7 +1092,8 @@ var pjson = {
 	jspm: jspm,
 	homepage: homepage,
 	devDependencies: devDependencies,
-	dependencies: dependencies
+	dependencies: dependencies,
+	husky: husky
 };
 
 const Version = pjson.version;

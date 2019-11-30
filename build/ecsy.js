@@ -29,8 +29,10 @@
 	    if (system.init) system.init();
 	    system.order = this._systems.length;
 	    this._systems.push(system);
-	    if (system.execute) this._executeSystems.push(system);
-	    this.sortSystems();
+	    if (system.execute) {
+	      this._executeSystems.push(system);
+	      this.sortSystems();
+	    }
 	    return this;
 	  }
 

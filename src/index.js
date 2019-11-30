@@ -1,7 +1,16 @@
+if (window && window.performance) {
+  // Do nothing
+} else {
+  try {
+    const { performance } = require("perf_hooks");
+    global.performance = performance;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 if (typeof window === "undefined") {
   //console.log(`Node.js`);
-  const { performance } = require("perf_hooks");
-  global.performance = performance;
 } else {
   //console.log(`Browser`);
 }

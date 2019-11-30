@@ -457,7 +457,7 @@ class Entity {
   }
 
   import(data) {
-    this._id = data.id;
+    this.id = data.id;
     if (!data.hasOwnProperty("_components")) return;
     const worldComponents = this._world.componentsManager.getComponents();
     for (const [key, value] of Object.entries(data._components)) {

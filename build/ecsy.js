@@ -1611,10 +1611,13 @@
 	  return Component;
 	}
 
-	if (typeof window === "undefined") {
-	  //console.log(`Node.js`);
-	  const { performance } = require("perf_hooks");
-	  global.performance = performance;
+	if (window && window.performance) ; else {
+	  try {
+	    const { performance } = require("perf_hooks");
+	    global.performance = performance;
+	  } catch (e) {
+	    console.log(e);
+	  }
 	}
 
 	exports.Component = Component;

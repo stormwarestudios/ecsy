@@ -151,9 +151,12 @@ export default class Entity {
     this.id = data.id;
     if (!data.hasOwnProperty("_components")) return;
     const worldComponents = this._world.componentsManager.getComponents();
-    for (const [key, value] of Object.entries(data._components)) {
-      if (worldComponents.hasOwnProperty(key)) {
-        this.addComponent(worldComponents[key], value);
+    for (const [name, component] of Object.entries(data._components)) {
+      if (worldComponents.hasOwnProperty(name)) {
+        this.addComponent(worldComponents[name], component);
+        if (this._components[name].hasOwnProperty("import")) {
+          this._components[name].import();
+        }
       }
     }
   }

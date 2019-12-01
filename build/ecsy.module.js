@@ -1606,6 +1606,7 @@ function createComponentClass(schema, name) {
 }
 
 try {
+  const window = window || {};
   const { performance } = require("perf_hooks");
   global.performance = performance;
 } catch (e) {

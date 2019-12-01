@@ -1616,13 +1616,13 @@
 	  return Component;
 	}
 
-	if (window && window.performance) ; else {
-	  try {
-	    const { performance } = require("perf_hooks");
-	    global.performance = performance;
-	  } catch (e) {
-	    console.log(e);
-	  }
+	try {
+	  const { performance } = require("perf_hooks");
+	  global.performance = performance;
+	} catch (e) {
+	  console.log(
+	    `perf_hooks unavailable; assuming fallback to window.performance is OK.`
+	  );
 	}
 
 	exports.Component = Component;

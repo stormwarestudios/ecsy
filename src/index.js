@@ -1,19 +1,26 @@
-if (window && window.performance) {
-  // Do nothing
-} else {
-  try {
-    const { performance } = require("perf_hooks");
-    global.performance = performance;
-  } catch (e) {
-    console.log(e);
-  }
+try {
+  const { performance } = require("perf_hooks");
+  global.performance = performance;
+} catch (e) {
+  console.log(
+    `perf_hooks unavailable; assuming fallback to window.performance is OK.`
+  );
 }
 
-if (typeof window === "undefined") {
-  //console.log(`Node.js`);
-} else {
-  //console.log(`Browser`);
-}
+// if (window && window.performance) {
+//   // Do nothing
+// } else {
+//   try {
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
+//
+// if (typeof window === "undefined") {
+//   //console.log(`Node.js`);
+// } else {
+//   //console.log(`Browser`);
+// }
 
 export { World } from "./World.js";
 export { System, Not } from "./System.js";

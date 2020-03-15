@@ -1104,14 +1104,14 @@ function b(a) {
 }
 
 class World {
-  constructor() {
+  constructor(options = {}) {
+    this.generateId = options.idGenerator || b;
+
     this.componentsManager = new ComponentManager(this);
     this.entityManager = new EntityManager(this);
     this.systemManager = new SystemManager(this);
 
     this.enabled = true;
-
-    this.generateId = b;
 
     this.eventQueues = {};
 
@@ -1121,10 +1121,6 @@ class World {
       });
       window.dispatchEvent(event);
     }
-  }
-
-  setIdGenerator(idGeneratorFunc) {
-    this.generateId = idGeneratorFunc;
   }
 
   registerComponent(Component) {

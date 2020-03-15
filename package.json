@@ -2,7 +2,10 @@
   "name": "ecsy",
   "version": "0.1.4",
   "description": "Entity Component System in JS",
-  "main": "index.js",
+  "main": "build/ecsy.js",
+  "jsnext:main": "build/ecsy.module.js",
+  "module": "build/ecsy.module.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "build": "rollup -c && npm run docs",
     "docs": "rm docs/api/_sidebar.md; typedoc --readme none --mode file --excludeExternals --plugin typedoc-plugin-markdown  --theme docs/theme --hideSources --hideBreadcrumbs --out docs/api/ --includeDeclarations --includes 'src/**/*.d.ts' src; touch docs/api/_sidebar.md",
@@ -64,6 +67,7 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.1",
     "http-server": "^0.11.1",
+    "husky": "^3.1.0",
     "nodemon": "^1.19.2",
     "prettier": "^1.18.2",
     "rollup": "^1.21.4",
@@ -73,5 +77,10 @@
     "typedoc-plugin-markdown": "^2.2.6",
     "typescript": "^3.6.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run build && git add build && git commit -m 'build'"
+    }
+  }
 }

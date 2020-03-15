@@ -326,18 +326,12 @@
 	Query.prototype.ENTITY_REMOVED = "Query#ENTITY_REMOVED";
 	Query.prototype.COMPONENT_CHANGED = "Query#COMPONENT_CHANGED";
 
-	function b(a) {
-	  return a
-	    ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16)
-	    : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
-	}
-
 	class Entity {
 	  constructor(world, id) {
 	    this._world = world || null;
 
 	    // Unique ID for this entity
-	    this.id = id || b();
+	    this.id = id || this._world.generateId();
 
 	    // List of components types the entity has
 	    this._ComponentTypes = [];
@@ -443,7 +437,7 @@
 
 	  // Initialize the entity. To be used when returning an entity to the pool
 	  reset() {
-	    this.id = b();
+	    this.id = this._world.generateId();
 	    this._world = null;
 	    this._ComponentTypes.length = 0;
 	    this.queries.length = 0;
@@ -1114,6 +1108,12 @@
 
 	const Version = pjson.version;
 
+	function b(a) {
+	  return a
+	    ? (a ^ ((Math.random() * 16) >> (a / 4))).toString(16)
+	    : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b);
+	}
+
 	class World {
 	  constructor() {
 	    this.componentsManager = new ComponentManager(this);
@@ -1121,6 +1121,8 @@
 	    this.systemManager = new SystemManager(this);
 
 	    this.enabled = true;
+
+	    this.generateId = b;
 
 	    this.eventQueues = {};
 
@@ -1130,6 +1132,10 @@
 	      });
 	      window.dispatchEvent(event);
 	    }
+	  }
+
+	  setIdGenerator(idGeneratorFunc) {
+	    this.generateId = idGeneratorFunc;
 	  }
 
 	  registerComponent(Component) {
@@ -1147,7 +1153,7 @@
 	  }
 
 	  getSystems() {
-	    return this.systemManager.getSystems();
+	    return this.systemManager.getSystems();uuid;
 	  }
 
 	  execute(delta, time) {

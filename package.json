@@ -78,11 +78,6 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run build && git add build && git commit -m 'build'"
-    }
-  },
   "prettier": {
     "singleQuote": true
   }

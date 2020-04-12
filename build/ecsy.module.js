@@ -1073,6 +1073,9 @@ var husky = {
 		"pre-push": "npm run build && git add build && git commit -m 'build'"
 	}
 };
+var prettier = {
+	singleQuote: true
+};
 var pjson = {
 	name: name,
 	version: version,
@@ -1092,7 +1095,8 @@ var pjson = {
 	homepage: homepage,
 	devDependencies: devDependencies,
 	dependencies: dependencies,
-	husky: husky
+	husky: husky,
+	prettier: prettier
 };
 
 const Version = pjson.version;
